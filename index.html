@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAQs — DBM Heavy Equipment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@600;700&family=Chivo+Mono:wght@400;700&family=Sora:wght@800&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<!-- Build provenance lives in DBM FAQ - BUILD NOTES.md, never as page text. -->
+<style>
+  :root{
+    --orange:#EF5016; --orange-hi:#F4703F; --orange-lt:#C9430D;
+    --char:#1A1A1A; --steel:#4B4F56; --silver:#C7C9CC;
+    --white:#FFFFFF; --bone:#CDC4AF;
+    --cement-10:#F2F3F4; --cement-15:#E9EAEC; --hair:#D5D7DA; --mute:#8A8D93; --body:#5B5F66;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--white);color:var(--char);
+       font-family:'Instrument Sans',sans-serif;line-height:1.65}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 34px}
+
+  /* Accent Line — 3px orange, one per section, anchored to the corner */
+  .seam{position:relative}
+  .seam::before{content:"";position:absolute;top:0;left:0;width:74px;height:3px;background:var(--orange)}
+
+  /* ---------- header ---------- */
+  header{background:var(--char)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 0}
+  .logo{display:block;height:56px;width:auto}
+  .logo path{fill:var(--orange)}
+  nav{display:flex;align-items:center;gap:30px}
+  .navlink{background:none;border:0;padding:4px 0;cursor:pointer;
+           font-family:'Familjen Grotesk',sans-serif;font-weight:700;font-size:12px;
+           letter-spacing:.16em;text-transform:uppercase;color:var(--white)}
+  .navlink .line{display:block;position:relative;overflow:hidden}
+  .navlink .row{display:flex;white-space:pre}
+  .navlink .row--b{position:absolute;inset:0;color:var(--bone)}
+  .navlink .ch{display:inline-block}
+  .tel{font-family:'Chivo Mono',monospace;font-weight:700;font-size:14px;letter-spacing:.05em;
+       color:var(--white);text-decoration:none;white-space:nowrap}
+  .tel:hover{color:var(--orange-hi)}
+
+  /* ---------- hero ---------- */
+  .hero{background:var(--char);padding:0 0 74px}
+  .hero .wrap{padding-top:34px}
+  .hero h1{margin:0;font-family:'Sora',sans-serif;font-weight:800;
+           font-size:clamp(46px,9vw,92px);line-height:.98;letter-spacing:.005em;
+           text-transform:uppercase;color:var(--white)}
+  .hero p{margin:22px 0 0;max-width:56ch;color:var(--silver);font-size:16.5px;text-wrap:pretty}
+  .actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:36px}
+
+  /* ---------- Slat Wipe primary action ---------- */
+  .slats{position:relative;overflow:hidden;border:0;cursor:pointer;
+         padding:19px 34px;background:var(--orange);
+         font-family:'Familjen Grotesk',sans-serif;font-weight:700;color:var(--white);
+         font-size:14px;letter-spacing:.24em;text-transform:uppercase;
+         clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px))}
+  .slats--dark{background:var(--char);box-shadow:inset 0 0 0 1.5px var(--steel)}
+  .slats .blades{position:absolute;inset:0}
+  .slats .slat{position:absolute;top:-12%;bottom:-12%;width:27%;background:var(--char)}
+  .slats--dark .slat{background:var(--orange)}
+  .slats .slat:nth-child(1){left:-6%}.slats .slat:nth-child(2){left:15%}
+  .slats .slat:nth-child(3){left:36%}.slats .slat:nth-child(4){left:57%}
+  .slats .slat:nth-child(5){left:78%}
+  .slats .lbl{position:relative;z-index:1}
+  button:focus-visible,a:focus-visible{outline:2px solid var(--silver);outline-offset:4px}
+
+  /* ---------- sections ---------- */
+  section{padding:60px 0}
+  .band{background:var(--cement-10)}
+  .band--bone{background:var(--bone)}
+  h2{margin:0;padding-top:26px;font-family:'Sora',sans-serif;font-weight:800;
+     font-size:clamp(24px,3.4vw,33px);letter-spacing:.01em;text-transform:uppercase;color:var(--char)}
+  .lede{margin:12px 0 0;max-width:62ch;color:var(--body);font-size:15px;text-wrap:pretty}
+  .grp{margin-top:30px}
+  .band--bone .lede{color:#4A4536}
+
+  /* ---------- ACC-01 Disclosure ---------- */
+  .acc{background:var(--white);box-shadow:inset 0 0 0 1px var(--hair)}
+  .band--bone .acc{box-shadow:inset 0 0 0 1px #B9AF97}
+  .accitem + .accitem{border-top:1px solid var(--cement-15)}
+  .acchead{position:relative;width:100%;border:0;cursor:pointer;background:transparent;text-align:left;
+           display:grid;grid-template-columns:26px 1fr auto;align-items:center;gap:16px;padding:22px}
+  .acchead .c{position:absolute;width:13px;height:13px;transform:scale(0)}
+  .acchead .c-tl{top:0;left:0;border-top:2.5px solid var(--orange);border-left:2.5px solid var(--orange);
+                 transform-origin:top left}
+  .acchead .c-br{bottom:0;right:0;border-bottom:2.5px solid var(--orange);border-right:2.5px solid var(--orange);
+                 transform-origin:bottom right}
+  .accmark{width:14px;height:14px;background:var(--steel);clip-path:polygon(0 0,100% 0,0 100%);display:block}
+  .accq{font-family:'Sora',sans-serif;font-weight:800;font-size:17.5px;letter-spacing:.01em;
+        color:var(--char);text-wrap:pretty;min-width:0}
+  .accstate{font-family:'Chivo Mono',monospace;font-weight:700;font-size:9.5px;letter-spacing:.18em;
+            color:var(--mute)}
+  .kerf{display:block;width:100%;height:2px}
+  .accpanel{height:0;overflow:hidden}
+  .accinner{padding:6px 22px 26px 60px;display:flex;flex-direction:column;gap:13px}
+  .accinner p{margin:0;color:var(--body);font-size:14px;line-height:1.7;max-width:660px;text-wrap:pretty}
+
+  /* ---------- closing ---------- */
+  .close{background:var(--char);padding:64px 0}
+  .close h2{color:var(--white)}
+  .close .lede{color:var(--silver)}
+  footer{background:var(--char);border-top:1px solid #2A2A2A;padding:30px 0 44px}
+  .fbar{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+  .flogo{display:block;height:44px;width:auto}
+  .flogo path{fill:var(--orange)}
+  .fbar span{font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--mute)}
+
+  @media (max-width:860px){
+    .wrap{padding:0 20px}
+    nav{display:none}
+    .logo{height:42px}
+    .flogo{height:34px}
+    section,.close{padding:44px 0}
+    .hero{padding-bottom:52px}
+    .accinner{padding:6px 20px 24px 20px}
+    .acchead{padding:19px 18px;gap:13px}
+    .accq{font-size:16px}
+    .slats{width:100%;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a href="/" aria-label="DBM Heavy Equipment — home">
+      <svg class="logo" viewBox="0 0 1240 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DBM">
+        <path d="M267.87,75.94H94.07c-.55,0-1,.45-1,1v265.44c0,.55.45,1,1,1h70.99c4.45,0,6.68,5.37,3.55,8.52l-74.84,71.33c-.63.63-.18,1.7.71,1.7h173.4c99.1,0,168.7-71.6,168.7-174.5s-69.6-174.5-168.7-174.5ZM322.29,257.54c-.39,32.61-25.25,60.4-55.38,60.34h-58.39c-.55,0-1-.44-1-1v-141.06c0-.55.45-1,1-1l58.4.05c30.26.18,54.98,28.41,55.38,60.76v21.9Z"/>
+        <path d="M727.43,242.38c-.79-.27-.84-1.36-.08-1.71,41.46-18.97,47.55-53.06,47.55-72.22,0-61.91-45.34-92.27-116.35-92.27l-184.23-.04c-.55,0-1,.45-1,1v347.13c0,.55.45,1,1,1l181.33-.19c103.69,0,134.79-48.23,134.79-100.22,0-24.02-9.59-64.02-63.01-82.49ZM569.5,212.73v-59.93c0-.55.45-1,1-1h76.15c2.19,0,13.63-.57,23.21,8.13,8.28,7.52,9.77,17.01,10.09,19.56v5.5c-.26,2.59-1.54,12.21-9.72,19.99-9.56,9.1-21.29,8.77-23.46,8.74h-76.27c-.55,0-1-.45-1-1ZM693.74,319.05c-.29,2.74-1.72,12.91-10.84,21.15-10.66,9.63-23.79,9.23-26.18,9.25h-85.09c-.62,0-1.12-.48-1.12-1.06v-63.4c0-.58.5-1.06,1.12-1.06h84.96c2.42-.01,15.21-.6,25.89,8.6,9.24,7.96,10.9,17.99,11.26,20.69v5.82Z"/>
+        <path d="M927.13,221.82v200.5c0,.6-.5,1.2-1.2,1.2h-93.7c-.5,0-1-.4-1-1V76.02c0-.6.5-1.2,1.2-1.2h101.6c.9,0,1.8.5,2.2,1.3l82.2,137.3c.3.4.9.4,1.2,0l82.5-137.6c.4-.6,1.2-1.1,1.9-1.1h101.7c.6,0,1.2.5,1.2,1.2v346.9c0,.4-.3.5-.5.5h-93.9c-.8,0-1.5-.6-1.5-1.5v-199.9c0-.4-.6-.6-.8-.3l-84.2,131.3c-2.8,4.4-10.2,4.3-13,0l-85.5-131.2h-.4v.1Z"/>
+      </svg>
+    </a>
+    <nav>
+      <button class="navlink" type="button" data-label="Service"></button>
+      <button class="navlink" type="button" data-label="Rentals"></button>
+      <button class="navlink" type="button" data-label="Equipment"></button>
+      <button class="navlink" type="button" data-label="Finance"></button>
+      <button class="navlink" type="button" data-label="Contact"></button>
+    </nav>
+    <a class="tel" href="tel:[role: dispatch line]">[role: dispatch line]</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap seam">
+    <h1>FAQs</h1>
+    <p>What operators ask us most — what we service, how rentals work, what we buy, and where we go. If your question isn't here, the phone is faster than a form.</p>
+    <div class="actions">
+      <button class="slats" type="button">
+        <span class="blades" aria-hidden="true"><span class="slat"></span><span class="slat"></span><span class="slat"></span><span class="slat"></span><span class="slat"></span></span>
+        <span class="lbl">Call Dispatch</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE & REPAIR -->
+<section>
+  <div class="wrap">
+    <div class="seam">
+      <h2>Service and repair</h2>
+      <p class="lede">The oldest part of this business and still the largest. The specialty work is the part most people don't expect.</p>
+    </div>
+    <div class="grp">
+      <div class="acc" data-acc>
+
+        <div class="accitem">
+          <button class="acchead" type="button" aria-expanded="false">
+            <span class="c c-tl" aria-hidden="true"></span><span class="c c-br" aria-hidden="true"></span>
+            <span class="accmark" aria-hidden="true"></span>
+            <span class="accq">Do you work on brands you don't sell?</span>
+            <span class="accstate">CLOSED</span>
+          </button>
+          <svg class="kerf" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="1000" y2="1" stroke="#EF5016" stroke-width="2"></line></svg>
+          <div class="accpanel" role="region">
+            <div class="accinner">
+              <p>Yes. Make and model don't decide whether we take the work — the job does. Tell us what the machine is, what it's doing, and any error code on the display, and it gets routed to a technician who has seen it before.</p>
+              <p>Parts for lines we don't carry are sourced by hand through long-standing supplier relationships rather than a catalogue lookup, so describe the part however you can. A photo is usually faster than a part number.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accitem">
+          <button class="acchead" type="button" aria-expanded="false">
+            <span class="c c-tl" aria-hidden="true"></span><span class="c c-br" aria-hidden="true"></span>
+            <span class="accmark" aria-hidden="true"></span>
+            <span class="accq">What specialty work do you take on?</span>
+            <span class="accstate">CLOSED</span>
+          </button>
+          <svg class="kerf" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="1000" y2="1" stroke="#EF5016" stroke-width="2"></line></svg>
+          <div class="accpanel" role="region">
+            <div class="accinner">
+              <p>The work other shops send out — [role: specialty services catalogue]. Specialty tooling and the trucks to bring it to you are the reason those jobs stay in house instead of becoming somebody else's schedule.</p>
+              <p>If you're not sure whether a job qualifies, describe it. The answer is usually yes, and when it isn't we'll say so on the call rather than after a site visit.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accitem">
+          <button class="acchead" type="button" aria-expanded="false">
+            <span class="c c-tl" aria-hidden="true"></span><span class="c c-br" aria-hidden="true"></span>
+            <span class="accmark" aria-hidden="true"></span>
+            <span class="accq">Do you come to the job site?</span>
+            <span class="accstate">CLOSED</span>
+          </button>
+          <svg class="kerf" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="1000" y2="1" stroke="#EF5016" stroke-width="2"></line></svg>
+          <div class="accpanel" role="region">
+            <div class="accinner">
+              <p>Field service is the default for machines that can't move, across [role: coverage]. Shop work happens when a teardown or the tooling makes it the better call — and we'll tell you which one your job is before a truck is dispatched.</p>
+              <p>Eleven technicians run field and shop work today, and we're hiring. Callbacks on a machine-down come back within [role: response window].</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RENTALS -->
+<section class="band">
+  <div class="wrap">
+    <div class="seam">
+      <h2>Rentals</h2>
+      <p class="lede">A fleet we own, plus access to a much larger one. Availability moves daily, so every answer here ends in a conversation rather than a checkout.</p>
+    </div>
+    <div class="grp">
+      <div class="acc" data-acc>
+
+        <div class="accitem">
+          <button class="acchead" type="button" aria-expanded="false">
+            <span class="c c-tl" aria-hidden="true"></span><span class="c c-br" aria-hidden="true"></span>
+            <span class="accmark" aria-hidden="true"></span>
+            <span class="accq">Can I see what's available right now?</span>
+            <span class="accstate">CLOSED</span>
+          </button>
+          <svg class="kerf" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="1000" y2="1" stroke="#EF5016" stroke-width="2"></line></svg>
+          <div class="accpanel" role="region">
+            <div class="accinner">
+              <p>You can see what we run — the categories and sizes we can put on a site. Live counts we deliberately don't publish, because much of the breadth comes through partner fleets, and a number that's right at breakfast is wrong by lunch.</p>
+              <p>Send the job and the dates and you'll get a real answer on what can be there, not a number that expires.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accitem">
+          <button class="acchead" type="button" aria-expanded="false">
+            <span class="c c-tl" aria-hidden="true"></span><span class="c c-br" aria-hidden="true"></span>
+            <span class="accmark" aria-hidden="true"></span>
+            <span class="accq">What do I need before you'll deliver?</span>
+            <span class="accstate">CLOSED</span>
+          </button>
+          <svg class="kerf" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="1000" y2="1" stroke="#EF5016" stroke-width="2"></line></svg>
+          <div class="accpanel" role="region">
+            <div class="accinner">
+              <p>Proof of adequate insurance on the machine — [role: coverage requirement]. That's the qualifier, and it's asked before delivery rather than before a conversation. Not sure what you carry? Ask anyway, and we'll walk through it.</p>
+              <p>Site access gets confirmed by phone before a truck is booked: gate width, overhead lines, ground conditions. A machine that can't get in costs a day.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accitem">
+          <button class="acchead" type="button" aria-expanded="false">
+            <span class="c c-tl" aria-hidden="true"></span><span class="c c-br" aria-hidden="true"></span>
+            <span class="accmark" aria-hidden="true"></span>
+            <span class="accq">How short can a rental be?</span>
+            <span class="accstate">CLOSED</span>
+          </button>
+          <svg class="kerf" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="1000" y2="1" stroke="#EF5016" stroke-width="2"></line></svg>
+          <div class="accpanel" role="region">
+            <div class="accinner">
+              <p>It depends on the machine. Smaller equipment moves on shorter terms; the large iron carries a minimum, because the logistics of getting it to a site and back are the same whether you keep it a week or a season.</p>
+              <p>Rates are quoted by the day, the week, and the month, against the machine you actually need.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUYING & SELLING -->
+<section>
+  <div class="wrap">
+    <div class="seam">
+      <h2>Buying and selling</h2>
+      <p class="lede">New equipment inside our dealer territory, used equipment anywhere in the country, and an open door on anything you're trying to move.</p>
+    </div>
+    <div class="grp">
+      <div class="acc" data-acc>
+
+        <div class="accitem">
+          <button class="acchead" type="button" aria-expanded="false">
+            <span class="c c-tl" aria-hidden="true"></span><span class="c c-br" aria-hidden="true"></span>
+            <span class="accmark" aria-hidden="true"></span>
+            <span class="accq">Where do you sell and deliver?</span>
+            <span class="accstate">CLOSED</span>
+          </button>
+          <svg class="kerf" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="1000" y2="1" stroke="#EF5016" stroke-width="2"></line></svg>
+          <div class="accpanel" role="region">
+            <div class="accinner">
+              <p>New machines and rentals run inside our assigned dealer territory — Nevada and the neighbouring California counties.</p>
+              <p>Used equipment we sell nationwide. If you're outside the territory and looking to buy, that's the place to start.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accitem">
+          <button class="acchead" type="button" aria-expanded="false">
+            <span class="c c-tl" aria-hidden="true"></span><span class="c c-br" aria-hidden="true"></span>
+            <span class="accmark" aria-hidden="true"></span>
+            <span class="accq">Will you buy my machine or take it in trade?</span>
+            <span class="accstate">CLOSED</span>
+          </button>
+          <svg class="kerf" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="1000" y2="1" stroke="#EF5016" stroke-width="2"></line></svg>
+          <div class="accpanel" role="region">
+            <div class="accinner">
+              <p>Both, and there are no brand restrictions on what we'll look at. You don't have to be buying something to sell us something.</p>
+              <p>To give you a real answer we need the make, model, serial number, hours, condition, and photos. Send it even if the uploads fail — we'll come back for the rest.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accitem">
+          <button class="acchead" type="button" aria-expanded="false">
+            <span class="c c-tl" aria-hidden="true"></span><span class="c c-br" aria-hidden="true"></span>
+            <span class="accmark" aria-hidden="true"></span>
+            <span class="accq">Why isn't the price on the listing?</span>
+            <span class="accstate">CLOSED</span>
+          </button>
+          <svg class="kerf" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="1000" y2="1" stroke="#EF5016" stroke-width="2"></line></svg>
+          <div class="accpanel" role="region">
+            <div class="accinner">
+              <p>Because the number depends on what you're bringing to it — a trade, a finance structure, a package of more than one machine. Request the price on any listing and the stock number comes with it, so the only thing left to ask is who to call.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCE — the one Bone band -->
+<section class="band--bone">
+  <div class="wrap">
+    <div class="seam">
+      <h2>Finance</h2>
+      <p class="lede">Manufacturer financing for new equipment, an account with us for everything else.</p>
+    </div>
+    <div class="grp">
+      <div class="acc" data-acc>
+
+        <div class="accitem">
+          <button class="acchead" type="button" aria-expanded="false">
+            <span class="c c-tl" aria-hidden="true"></span><span class="c c-br" aria-hidden="true"></span>
+            <span class="accmark" aria-hidden="true"></span>
+            <span class="accq">How do I set up an account before renting?</span>
+            <span class="accstate">CLOSED</span>
+          </button>
+          <svg class="kerf" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="1000" y2="1" stroke="#EF5016" stroke-width="2"></line></svg>
+          <div class="accpanel" role="region">
+            <div class="accinner">
+              <p>Complete our account application and it goes for review. That leads either to a credit line with us or a card-secured arrangement for rentals — both work, and which one you land on doesn't change the machine or the rate.</p>
+              <p>Doing it before your first rental means the equipment isn't waiting on paperwork.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accitem">
+          <button class="acchead" type="button" aria-expanded="false">
+            <span class="c c-tl" aria-hidden="true"></span><span class="c c-br" aria-hidden="true"></span>
+            <span class="accmark" aria-hidden="true"></span>
+            <span class="accq">Can rental payments go toward buying the machine?</span>
+            <span class="accstate">CLOSED</span>
+          </button>
+          <svg class="kerf" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1" x2="1000" y2="1" stroke="#EF5016" stroke-width="2"></line></svg>
+          <div class="accpanel" role="region">
+            <div class="accinner">
+              <p>We offer a rental purchase option. The structure depends on the machine and the term, so it's a conversation rather than a published table — ask about our RPO program and we'll walk you through what it would look like on the machine you're running.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="close">
+  <div class="wrap seam" style="padding-top:28px">
+    <h2>Ask us the actual question</h2>
+    <p class="lede">Describe the machine and the job. You'll get a person who has seen it before, not a ticket number.</p>
+    <div class="actions">
+      <button class="slats" type="button">
+        <span class="blades" aria-hidden="true"><span class="slat"></span><span class="slat"></span><span class="slat"></span><span class="slat"></span><span class="slat"></span></span>
+        <span class="lbl">Call Dispatch</span>
+      </button>
+      <button class="slats slats--dark" type="button">
+        <span class="blades" aria-hidden="true"><span class="slat"></span><span class="slat"></span><span class="slat"></span><span class="slat"></span><span class="slat"></span></span>
+        <span class="lbl">Send A Question</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap fbar">
+    <svg class="flogo" viewBox="0 0 1240 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DBM Heavy Equipment">
+      <path d="M267.87,75.94H94.07c-.55,0-1,.45-1,1v265.44c0,.55.45,1,1,1h70.99c4.45,0,6.68,5.37,3.55,8.52l-74.84,71.33c-.63.63-.18,1.7.71,1.7h173.4c99.1,0,168.7-71.6,168.7-174.5s-69.6-174.5-168.7-174.5ZM322.29,257.54c-.39,32.61-25.25,60.4-55.38,60.34h-58.39c-.55,0-1-.44-1-1v-141.06c0-.55.45-1,1-1l58.4.05c30.26.18,54.98,28.41,55.38,60.76v21.9Z"/>
+      <path d="M727.43,242.38c-.79-.27-.84-1.36-.08-1.71,41.46-18.97,47.55-53.06,47.55-72.22,0-61.91-45.34-92.27-116.35-92.27l-184.23-.04c-.55,0-1,.45-1,1v347.13c0,.55.45,1,1,1l181.33-.19c103.69,0,134.79-48.23,134.79-100.22,0-24.02-9.59-64.02-63.01-82.49ZM569.5,212.73v-59.93c0-.55.45-1,1-1h76.15c2.19,0,13.63-.57,23.21,8.13,8.28,7.52,9.77,17.01,10.09,19.56v5.5c-.26,2.59-1.54,12.21-9.72,19.99-9.56,9.1-21.29,8.77-23.46,8.74h-76.27c-.55,0-1-.45-1-1ZM693.74,319.05c-.29,2.74-1.72,12.91-10.84,21.15-10.66,9.63-23.79,9.23-26.18,9.25h-85.09c-.62,0-1.12-.48-1.12-1.06v-63.4c0-.58.5-1.06,1.12-1.06h84.96c2.42-.01,15.21-.6,25.89,8.6,9.24,7.96,10.9,17.99,11.26,20.69v5.82Z"/>
+      <path d="M927.13,221.82v200.5c0,.6-.5,1.2-1.2,1.2h-93.7c-.5,0-1-.4-1-1V76.02c0-.6.5-1.2,1.2-1.2h101.6c.9,0,1.8.5,2.2,1.3l82.2,137.3c.3.4.9.4,1.2,0l82.5-137.6c.4-.6,1.2-1.1,1.9-1.1h101.7c.6,0,1.2.5,1.2,1.2v346.9c0,.4-.3.5-.5.5h-93.9c-.8,0-1.5-.6-1.5-1.5v-199.9c0-.4-.6-.6-.8-.3l-84.2,131.3c-2.8,4.4-10.2,4.3-13,0l-85.5-131.2h-.4v.1Z"/>
+    </svg>
+    <span>[role: address] · [role: yard hours]</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const R = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const hoverPress = (btn, tl, y = 2) => {
+    btn.addEventListener('pointerenter', () => tl.play());
+    btn.addEventListener('pointerleave', () => tl.reverse());
+    btn.addEventListener('pointerdown', () =>
+      gsap.to(btn, { y, duration: 0.06, ease: 'power1.out', overwrite: 'auto' }));
+    ['pointerup', 'pointerleave'].forEach(e => btn.addEventListener(e, () =>
+      gsap.to(btn, { y: 0, duration: 0.12, ease: 'power1.out', overwrite: 'auto' })));
+  };
+
+  /* Slat Wipe */
+  document.querySelectorAll('.slats').forEach(btn => {
+    const slats = btn.querySelectorAll('.slat');
+    gsap.set(slats, { skewX: -20, scaleY: 0, transformOrigin: 'top center' });
+    const tl = gsap.timeline({ paused: true })
+      .to(slats, { scaleY: 1, duration: 0.28, ease: 'power2.out', stagger: 0.045 }, 0);
+    hoverPress(btn, tl, 2);
+  });
+
+  /* Char Stagger */
+  document.querySelectorAll('.navlink').forEach(btn => {
+    const text = btn.dataset.label;
+    const chars = t => [...t].map(c => '<span class="ch">' + (c === ' ' ? '&nbsp;' : c) + '</span>').join('');
+    btn.innerHTML = '<span class="line"><span class="row row--a">' + chars(text) +
+                    '</span><span class="row row--b">' + chars(text) + '</span></span>';
+    gsap.set(btn.querySelectorAll('.row--b .ch'), { yPercent: 110 });
+    const tl = gsap.timeline({ paused: true })
+      .to(btn.querySelectorAll('.row--a .ch'), { yPercent: -110, duration: 0.34, ease: 'power2.inOut', stagger: 0.02 }, 0)
+      .to(btn.querySelectorAll('.row--b .ch'), { yPercent: 0,    duration: 0.34, ease: 'power2.inOut', stagger: 0.02 }, 0);
+    hoverPress(btn, tl, 2);
+  });
+
+  /* ACC-01 Disclosure */
+  document.querySelectorAll('[data-acc]').forEach(group => {
+    const items = Array.from(group.querySelectorAll('.accitem'));
+    items.forEach(item => {
+      const head    = item.querySelector('.acchead');
+      const panel   = item.querySelector('.accpanel');
+      const mark    = item.querySelector('.accmark');
+      const state   = item.querySelector('.accstate');
+      const kerf    = item.querySelector('.kerf line');
+      const corners = item.querySelectorAll('.c');
+
+      // DrawSVG substitute — core GSAP dash offset, same left-to-right cut.
+      if (kerf) gsap.set(kerf, { attr: { 'stroke-dasharray': 1000 }, strokeDashoffset: 1000 });
+
+      item.__open = false;
+      item.__set = open => {
+        item.__open = open;
+        head.setAttribute('aria-expanded', open ? 'true' : 'false');
+        state.textContent = open ? 'OPEN' : 'CLOSED';
+        state.style.color = open ? '#C9430D' : '#8A8D93';
+        gsap.to(mark, { rotate: open ? 90 : 0, backgroundColor: open ? '#EF5016' : '#4B4F56',
+                        duration: R ? 0 : 0.3, ease: 'power2.out', overwrite: 'auto' });
+        if (kerf) gsap.to(kerf, { strokeDashoffset: open ? 0 : 1000,
+                        duration: R ? 0 : 0.4, ease: 'power2.inOut', overwrite: 'auto' });
+        gsap.to(corners, { scale: open ? 1 : 0, duration: R ? 0 : 0.26, ease: 'power2.out', overwrite: 'auto' });
+        gsap.to(panel, { height: open ? 'auto' : 0, duration: R ? 0 : 0.38, ease: 'power2.inOut', overwrite: 'auto' });
+        if (open && !R) {
+          gsap.fromTo(panel.firstElementChild.children,
+            { opacity: 0, y: 8 },
+            { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out', stagger: 0.04, delay: 0.08, overwrite: 'auto' });
+        }
+      };
+
+      head.addEventListener('click', () => {
+        const next = !item.__open;
+        items.forEach(o => { if (o !== item && o.__open) o.__set(false); });
+        item.__set(next);
+      });
+
+      head.addEventListener('focus', () => gsap.to(corners, { scale: 1, duration: 0.2, ease: 'power2.out' }));
+      head.addEventListener('blur',  () => { if (!item.__open) gsap.to(corners, { scale: 0, duration: 0.2 }); });
+    });
+  });
+})();
+</script>
+</body>
+</html>
